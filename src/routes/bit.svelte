@@ -1,6 +1,7 @@
 <script lang="ts">
     import clsx from "clsx";
 	import { onMount } from "svelte";
+    import { selectedDay } from "$lib/dayStore";
 
     enum DayState{
         Passed, Current, Future
@@ -14,7 +15,7 @@
     export let day: Date;
     export let text: string = "";
 
-    let viewState = ViewState.Future;
+    let viewState: ViewState;
 
     onMount(() => {
         if(dayState == DayState.Future){
@@ -43,6 +44,10 @@
         }
     }
 
+    function onClick() {
+        selectedDay.select(day);
+    }
+
     function getDayColor() {
         const yearMod = day.getFullYear() % 10;
         return clsx(
@@ -61,7 +66,12 @@
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div id = "{dayState === DayState.Current?"today":""}" class="w-8 h-8 relative" on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div id = "{dayState === DayState.Current?"today":""}" class="w-8 h-8 relative" 
+    on:mouseenter={onMouseEnter} 
+    on:mouseleave={onMouseLeave}
+    on:click={onClick}
+    >
     <div class={clsx(
         'day-common',
         getDayColor(),
