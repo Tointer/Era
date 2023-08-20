@@ -12,6 +12,7 @@
 
     export let dayState: DayState;
     export let day: Date;
+    export let text: string = "";
 
     let viewState = ViewState.Future;
 
@@ -41,20 +42,34 @@
             viewState = ViewState.Passed;
         }
     }
+
+    function getDayColor() {
+        const yearMod = day.getFullYear() % 10;
+        return clsx(
+            yearMod == 0 && 'bg-red-300',
+            yearMod == 1 && 'bg-orange-300',
+            yearMod == 2 && 'bg-fuchsia-300',
+            yearMod == 3 && 'bg-green-300',
+            yearMod == 4 && 'bg-pink-300',
+            yearMod == 5 && 'bg-blue-300',
+            yearMod == 6 && 'bg-rose-300',
+            yearMod == 7 && 'bg-purple-300',
+            yearMod == 8 && 'bg-teal-300',
+            yearMod == 9 && 'bg-gray-300',
+        )
+    }
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div id = "{dayState === DayState.Current?"today":""}" class="w-8 h-8 relative" on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave}>
     <div class={clsx(
         'day-common',
-        viewState === ViewState.Passed && 'h-5/6 w-5/6 bg-zinc-700',
-        viewState === ViewState.PassedHover && 'h-4/6 w-4/6 bg-zinc-700',
-        viewState === ViewState.Future &&'h-5/6 w-5/6 bg-red-300 border-zinc-700 border-2',
-        viewState === ViewState.FutureHover && 'h-5/6 w-5/6 border-zinc-700 border-4',
-      )}></div>
+        getDayColor(),
+        viewState === ViewState.Passed && 'h-5/6 w-5/6',
+        viewState === ViewState.PassedHover && 'h-4/6 w-4/6',
+        viewState === ViewState.Future &&'h-5/6 w-5/6 ',
+        viewState === ViewState.FutureHover && 'h-5/6 w-5/6  ',
+      )}>
+        {text}
+    </div>
 </div>
-
-<style>
-    #today {
-    }
-</style>
