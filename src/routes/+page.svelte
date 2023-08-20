@@ -18,7 +18,7 @@
     <DayTable/>
     <aside class="h-[90vh] w-1/5 right-0 mx-5">
         <Card class="text-center h-full w-full " size="lg">
-            {$selectedDay}
+            {$selectedDay.toLocaleDateString("en-US", { weekday: "long", year: 'numeric', month: 'long', day: 'numeric' })}
         </Card>
     </aside>
 </div>
