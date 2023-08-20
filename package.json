@@ -37,6 +37,7 @@
 		"clsx": "^2.0.0",
 		"flowbite": "^1.8.1",
 		"flowbite-svelte": "^0.43.3",
+		"store2": "^2.14.2",
 		"tailwind-merge": "^1.14.0"
 	}
 }
