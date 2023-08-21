@@ -1,8 +1,5 @@
 import { writable } from 'svelte/store';
-
-function cleanDate(date: Date) {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-}
+import { cleanDate } from './dateUtils';
 
 function createDayStore() {
 	const { subscribe, set, update } = writable(cleanDate(new Date()));
