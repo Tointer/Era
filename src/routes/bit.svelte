@@ -1,7 +1,9 @@
 <script lang="ts">
     import clsx from "clsx";
 	import { onMount } from "svelte";
-    import { selectedDay } from "$lib/dayStore";
+    import { selectedDay, getDayTag, EE} from "$lib/dayStore";
+    import EventEmitter from "eventemitter3";
+
 
     enum DayState{
         Passed, Current, Future
@@ -13,8 +15,8 @@
 
     export let dayState: DayState;
     export let day: Date;
-    export let text: string = "";
 
+    let tag = "";
     let viewState: ViewState;
 
     onMount(() => {
@@ -23,6 +25,11 @@
         }
         else if(dayState == DayState.Passed){
             viewState = ViewState.Passed;
+        }
+
+        tag = getDayTag(day);
+        if(!tag){
+            tag = "";
         }
     });
 
@@ -44,8 +51,27 @@
         }
     }
 
+
     function onClick() {
+        //set my day as selected
         selectedDay.select(day);
+
+        const onTagChage = (newTag: {date: Date, tag: string}) => {
+            console.log("on tag change on " + newTag.date.getTime() + " my time:" + day.getTime() + " tag:" + newTag.tag);
+            if(newTag.date.getTime() === day.getTime()){
+                tag = newTag.tag;
+            }
+        }
+
+        EE.on("dayChange:tag", onTagChage);
+
+        const unsubscribeDay = selectedDay.subscribe((value) => {
+            if(value.getTime() !== day.getTime()){
+                console.log("unsubscribing");
+                unsubscribeDay();
+                EE.off("dayChange:tag", onTagChage);
+            }
+        })
     }
 
     function getDayColor() {
@@ -80,6 +106,6 @@
         viewState === ViewState.Future &&'h-5/6 w-5/6 ',
         viewState === ViewState.FutureHover && 'h-5/6 w-5/6  ',
       )}>
-        {text}
+        {tag}
     </div>
 </div>

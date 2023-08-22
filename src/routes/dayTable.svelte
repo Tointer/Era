@@ -11,8 +11,11 @@
     
     let daysTotal = Math.floor((endDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24);
 
+    const beforeMount = Date.now()/1000;
     onMount(() => {
-        console.log("DayTable mounted "  + Date.now()/1000);
+        const afterMount = Date.now()/1000;
+        console.log("Day table mounted in: " + (afterMount - beforeMount));
+
         mounted = true;
     });
 

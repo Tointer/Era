@@ -1,15 +1,25 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, createEventDispatcher } from 'svelte';
+    import { get } from 'svelte/store';
     import DayTable from './dayTable.svelte'
     import { Card, Input } from 'flowbite-svelte';
-    import { selectedDay } from "$lib/dayStore";
+    import { selectedDay, setDayTag, getDayTag, EE } from "$lib/dayStore";
 
-    let picker : any;
-
-    console.log("before mount " + Date.now()/1000)
+    const beforeMount = Date.now()/1000;
     onMount(() => {
-        console.log("on mount "  + Date.now()/1000)
+        const afterMount = Date.now()/1000;
+
+        console.log("Page mounted in: " + (afterMount - beforeMount));
+
+        EE.on("selectedDayChanged", () => tagInput = getDayTag($selectedDay));
     });
+
+    function onTagChange(e: any) {
+        console.log(e.target.value)
+        setDayTag($selectedDay, e.target.value);
+    }
+
+    let tagInput = "";
 
 </script>
 
@@ -21,7 +31,7 @@
     <aside class="h-[90vh] w-1/5 right-0 mx-5">
         <Card class="text-center h-full w-full " size="lg">
             <div class="flex flex-row justify-between content-center">
-                <Input class="w-16" type="text" placeholder="tag" />
+                <Input on:change={onTagChange} bind:value={tagInput} class="w-16" type="text" placeholder="tag" />
                 {$selectedDay.toLocaleDateString("en-US", { weekday: "long", year: 'numeric', month: 'long', day: 'numeric' })}
             </div>
         </Card>
