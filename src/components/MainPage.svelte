@@ -26,19 +26,19 @@
 
 <div class="bg-white dark:bg-gray-900 w-full h-screen">
 <DarkMode/>
-<div class="flex align-center justify-center">
-    <aside class="h-[90vh] w-1/5 left-0 mx-5">
-        <Card class="text-center h-full" size="lg"></Card>
-    </aside>
+<div class="flex align-center justify-center w-full">
+    <!-- <div class="h-[90vh] w-full left-0 mx-5 max-w-2xl"">
+        <Card class="text-center h-full w-full max-w-full" size="lg"></Card>
+    </div> -->
     <DayTable/>
-    <aside class="h-[90vh] w-1/5 right-0 mx-5">
-        <Card class="text-center h-full w-full " size="lg">
+    <div class="h-[90vh] w-full right-0 mx-5 max-w-2xl">
+        <Card class="text-center h-full w-full max-w-full">
             <div class="flex flex-row justify-between content-center">
                 <Input on:change={onTagChange} bind:value={tagInput} class="w-16" type="text" placeholder="tag" />
                 {$selectedDay.toLocaleDateString("en-US", { weekday: "long", year: 'numeric', month: 'long', day: 'numeric' })}
             </div>
         </Card>
-    </aside>
+    </div>
 </div>
 </div>
 

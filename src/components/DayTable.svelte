@@ -52,7 +52,7 @@
 
 {#if mounted}
     <div 
-    class="grid grid-cols-25 max-h-[90vh] no-scrollbar overflow-y-auto"
+    class="grid grid-cols-25 shrink-0 max-h-[90vh] no-scrollbar overflow-y-auto"
     transition:slide={{ delay: 250, duration: 300, easing: quintOut, axis: 'x' }}
     on:introend={scrollToToday}>
         {#each Array(daysTotal) as _, index (index)}
