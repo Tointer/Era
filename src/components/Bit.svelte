@@ -1,9 +1,8 @@
 <script lang="ts">
     import clsx from "clsx";
 	import { onMount } from "svelte";
-    import { selectedDay, getDayTag, EE} from "$lib/dayStore";
-    import EventEmitter from "eventemitter3";
-
+    import { selectedDay, getDayTag, EE} from "../lib/dayStore";
+    export const prerender = true;
 
     enum DayState{
         Passed, Current, Future

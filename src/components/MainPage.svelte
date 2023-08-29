@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher } from 'svelte';
-    import { get } from 'svelte/store';
-    import DayTable from './dayTable.svelte'
+	import { onMount } from 'svelte';
+    import DayTable from './DayTable.svelte'
     import { Card, Input } from 'flowbite-svelte';
-    import { selectedDay, setDayTag, getDayTag, EE } from "$lib/dayStore";
+    import { selectedDay, setDayTag, getDayTag, EE } from "../lib/dayStore";
+    import { DarkMode } from 'flowbite-svelte';
+    import '../app.postcss';
 
     const beforeMount = Date.now()/1000;
     onMount(() => {
@@ -23,6 +24,8 @@
 
 </script>
 
+<div class="bg-white dark:bg-gray-900 w-full h-screen">
+<DarkMode/>
 <div class="flex align-center justify-center">
     <aside class="h-[90vh] w-1/5 left-0 mx-5">
         <Card class="text-center h-full" size="lg"></Card>
@@ -37,5 +40,8 @@
         </Card>
     </aside>
 </div>
+</div>
+
+
 
 

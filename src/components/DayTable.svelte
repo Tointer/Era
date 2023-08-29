@@ -1,9 +1,9 @@
 <script lang="ts">
-    import clsx from "clsx";
 	import { onMount } from "svelte";
-    import Bit from './bit.svelte'
+    import Bit from './Bit.svelte'
     import { slide } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
+    export const prerender = true;
 
     let startDate = new Date(2019, 1, 21);
     let endDate = new Date(2029, 1, 21);
