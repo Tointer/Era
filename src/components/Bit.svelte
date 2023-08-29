@@ -98,12 +98,12 @@
     on:click={onClick}
     >
     <div class={clsx(
-        'day-common',
+        'absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center align-middle',
         getDayColor(),
-        viewState === ViewState.Passed && 'h-5/6 w-5/6',
-        viewState === ViewState.PassedHover && 'h-4/6 w-4/6',
-        viewState === ViewState.Future &&'h-5/6 w-5/6 ',
-        viewState === ViewState.FutureHover && 'h-5/6 w-5/6  ',
+        viewState === ViewState.Passed && 'h-5/6 w-5/6 text-lg',
+        viewState === ViewState.PassedHover && 'h-4/6 w-4/6 text-base',
+        viewState === ViewState.Future &&'h-5/6 w-5/6 text-lg',
+        viewState === ViewState.FutureHover && 'h-5/6 w-5/6 text-lg',
       )}>
         {tag}
     </div>
