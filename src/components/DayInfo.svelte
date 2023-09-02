@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-    import DayTable from './DayTable.svelte'
     import { Card, Input } from 'flowbite-svelte';
     import { selectedDay, setDayTag, getDayTag, EE } from "../lib/dayStore";
-    import { DarkMode } from 'flowbite-svelte';
+    import { slide } from 'svelte/transition';
+    import { quintOut } from 'svelte/easing';
     import '../app.postcss';
 
     const beforeMount = Date.now()/1000;
@@ -24,11 +24,13 @@
 
 </script>
 
-<div class="h-[90vh] w-full right-0 mx-5 max-w-2xl">
-    <Card class="text-center h-full w-full max-w-full">
-        <div class="flex flex-row justify-between content-center">
-            <Input on:change={onTagChange} bind:value={tagInput} class="w-16" type="text" placeholder="tag" />
-            {$selectedDay.toLocaleDateString("en-US", { weekday: "long", year: 'numeric', month: 'long', day: 'numeric' })}
+<div class="h-[90vh] w-full right-0 mx-5 max-w-2xl" transition:slide={{ delay: 250, duration: 300, easing: quintOut, axis: 'x' }}>
+    <Card class="h-full w-full max-w-full">
+        <div class="flex flex-row justify-center content-center">
+            <Input on:change={onTagChange} bind:value={tagInput} class="w-12 h-12 text-center text-lg mx-4" type="text" placeholder="-" />
+            <div class="text-2xl">
+                {$selectedDay.toLocaleDateString("en-US", { weekday: "long", year: 'numeric', month: 'long', day: 'numeric' })}
+            </div>
         </div>
     </Card>
 </div>
