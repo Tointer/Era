@@ -37,7 +37,7 @@
             <TabItem open title="Dashboard">
                 <Accordion flush>
                 {#each tasks as task}
-                    <AccordionItem>
+                    <AccordionItem borderBottomClass="">
                         <span class="text-lg" slot="header">{task.title}</span>
                         <div class="text-2xl" slot="arrowup">
                             {task.daysLeft}
